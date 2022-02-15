@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+
 def allowed_editors(list_users):
     def decorator(func): #it can be of any name.
         def wrapper_func(request,*args,**kwargs):
@@ -7,7 +9,7 @@ def allowed_editors(list_users):
             if group in list_users:
                 return func(request,*args,**kwargs)
             else:
-                return HttpResponse("not allowed", status=405)
+                return HttpResponse("not allowed", status=405) #you can you render/redirect
             return func(request,*args,**kwargs)
         return wrapper_func
     return decorator
